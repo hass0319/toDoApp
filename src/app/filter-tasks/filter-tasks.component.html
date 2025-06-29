@@ -1,1 +1,5 @@
-<p>filter-tasks works!</p>
+<ng-template ngFor let-f [ngForOf]="selectedFilter">
+  <option [value]="f">
+    {{ f | titlecase }}
+  </option>
+</ng-template>

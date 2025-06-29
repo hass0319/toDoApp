@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-task-item',
@@ -11,5 +12,9 @@ export class TaskItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @Input()  task!: Task;
+  @Output() onToggle = new EventEmitter<void>();
+  @Output() onDelete = new EventEmitter<void>();
 
 }

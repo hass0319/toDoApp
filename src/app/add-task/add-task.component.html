@@ -1,1 +1,11 @@
-<p>add-task works!</p>
+<form (ngSubmit)="add()">
+  <input type="text" [(ngModel)]="newTask.title" name="title" placeholder="Enter task" required />
+
+  <label>Priority:</label>
+  <input type="range" [(ngModel)]="newTask.priority" name="priority" min="1" max="5" list="priorityList" />
+  <datalist id="priorityList">
+    <option *ngFor="let p of [1,2,3,4,5]" [value]="p">{{ p }}</option>
+  </datalist>
+
+  <button type="submit">Add Task</button>
+</form>

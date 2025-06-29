@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Filter } from "../task";
 
 @Component({
   selector: 'app-filter-tasks',
   templateUrl: './filter-tasks.component.html',
   styleUrls: ['./filter-tasks.component.css']
 })
-export class FilterTasksComponent implements OnInit {
+export class FilterTasksComponent{
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  @Output() filterChanged = new EventEmitter<Filter>();
 
+  selectedFilter: Filter = "all";
+
+  onFilterChange(filter: 'all'|'active'|'completed') {
+    this.selectedFilter = filter;
+    this.filterChanged.emit(filter);
+  }
 }

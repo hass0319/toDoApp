@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-task-list',
@@ -12,4 +13,7 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @Input() tasks: Task[] = [];
+  @Output() onToggle = new EventEmitter<Task>();
+  @Output() onDelete = new EventEmitter<Task>();
 }

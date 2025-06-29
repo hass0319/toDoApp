@@ -18,6 +18,8 @@
   <button type="submit">Add Task</button>
 </form> -->
 
-<app-add-task></app-add-task>
-<app-filter-tasks></app-filter-tasks>
-<app-task-list></app-task-list>
+<app-add-task (taskAdded)="onNewTask($event)"></app-add-task>
+
+<app-filter-tasks (filterChanged)="onFilterChange($event)"></app-filter-tasks>
+
+<app-task-list [tasks]="visibleTasks" (onToggle)="onToggle($event)" (onDelete)="onDelete($event)"></app-task-list>
