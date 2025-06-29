@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task, Filter } from './task';
 import { DatePipe } from '@angular/common';
 
@@ -9,40 +9,69 @@ import { DatePipe } from '@angular/common';
   providers:[DatePipe]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   filter: Filter = 'all';
-
   tasks: Task[] = [];
+  visibleTasks: Task[] = [];
+
+  constructor(private datePipe: DatePipe) {}
+
+  ngOnInit() {
+    this.filterTasks();
+  }
 
   onNewTask(task: Task) {
-    this.tasks.push(task);
+    this.tasks = [...this.tasks, task];
+    this.filterTasks();
   }
 
-  onFilterChange(filter: Filter) {
-    this.filter = filter;
+  onFilterChange(f: Filter) {
+    this.filter = f;
+    this.filterTasks();
   }
 
-  get visibleTasks(): Task[] {
-    return this.tasks
-      .filter(t =>
+  private filterTasks(){
+    this.visibleTasks = this.tasks.filter(t =>
+      !t.deleted &&(
         this.filter === 'all' ||
         (this.filter === 'active'    && !t.completed) ||
         (this.filter === 'completed' &&  t.completed)
       )
-      .sort((a, b) => (a.completed === b.completed) ? 0 : (a.completed ? 1 : -1));
+    );
+        // .sort((a, b) => (a.completed === b.completed) ? 0 : (a.completed ? 1 : -1));
   }
 
   onToggle (task: Task){
-    task.completed = !task.completed;
+    // task.completed = !task.completed;
+    this.tasks = this.tasks.map( t => t=== task?
+      {...t, completed: !t.completed}:
+      t );
+    this.filterTasks();
   }
 
   onDelete(task: Task) {
-    this.tasks = this.tasks.filter(t => t !== task);
-    task.deleted = true
+    // this.tasks = this.tasks.filter(t => t !== task);
+    // task.deleted = true
+    this.tasks = this.tasks.map( t => t=== task?
+      {...t, deleted:true}:
+      t );
+    this.filterTasks();
   }
 
-  constructor() { }
+  onUpdate(updated: Task) {
+    // this.tasks = this.tasks.map(t =>
+    //   t === this.tasks.find(x => x.createdAt === updated.createdAt && x.title === t.title)
+    //     ? updated
+    //     : t
+    // );
+
+    this.tasks = this.tasks.map( t =>
+      t.createdAt === updated.createdAt?
+      updated:
+      t );
+    this.filterTasks();
+  }
 }
 
 

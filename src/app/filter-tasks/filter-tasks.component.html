@@ -1,5 +1,11 @@
-<ng-template ngFor let-f [ngForOf]="selectedFilter">
+<!-- <ng-template ngFor let-f [ngForOf]="selectedFilter">
   <option [value]="f">
     {{ f | titlecase }}
   </option>
-</ng-template>
+</ng-template> -->
+
+<select [(ngModel)]="selectedFilter" (ngModelChange)="onFilterChange($event)">
+  <option *ngFor="let f of filters" [value]="f">
+    {{ f | titlecase }}
+  </option>
+</select>

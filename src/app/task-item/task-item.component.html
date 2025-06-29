@@ -1,5 +1,5 @@
 <div class="task-item" [class.completed]="task.completed">
-  <input type="checkbox" [checked]="task.completed" (change)="onToggle.emit()" />
+  <input type="checkbox" [checked]="task.completed" (change)="onToggle.emit(task)" />
 
   <span>
     {{ task.title }}
@@ -7,5 +7,7 @@
     <small>(Priority: {{ task.priority }})</small>
   </span>
 
-  <button class="delete-btn" (click)="onDelete.emit()">Delete</button>
+  <button class="delete-btn" (click)="onDelete.emit(task)">Delete</button>
 </div>
+
+<app-edit-task *ngIf="editing" [task]="task" (save)="saveEdit($event)" (cancel)="cancelEdit()"></app-edit-task>

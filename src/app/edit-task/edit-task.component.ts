@@ -18,7 +18,8 @@ export class EditTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.editTitle    = this.task.title;
-    this.editPriority = this.task.priority !== undefined ? this.task.priority : 0;
+    // this.editPriority = this.task.priority !== undefined ? this.task.priority : 0;
+    this.editPriority = this.task.priority ?? 1;
   }
 
   onSave() {

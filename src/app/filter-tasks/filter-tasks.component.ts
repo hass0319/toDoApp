@@ -13,6 +13,7 @@ export class FilterTasksComponent{
   @Output() filterChanged = new EventEmitter<Filter>();
 
   selectedFilter: Filter = "all";
+  filters: Filter[] = ['all','active','completed'];
 
   onFilterChange(filter: 'all'|'active'|'completed') {
     this.selectedFilter = filter;

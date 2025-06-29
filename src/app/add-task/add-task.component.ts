@@ -24,9 +24,9 @@ export class AddTaskComponent implements OnInit {
     deleted: false
   };
 
-  add() {
+  onAddTask() {
     const title = this.newTask.title.trim();
-    if (!title) { return; }
+    if (!title) return;
 
     this.taskAdded.emit({
       ...this.newTask,
@@ -36,7 +36,6 @@ export class AddTaskComponent implements OnInit {
       deleted: false
     });
 
-    // reset for next entry
     this.newTask = {
       title: '',
       createdAt: new Date(),

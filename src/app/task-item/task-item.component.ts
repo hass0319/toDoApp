@@ -14,7 +14,22 @@ export class TaskItemComponent implements OnInit {
   }
 
   @Input()  task!: Task;
-  @Output() onToggle = new EventEmitter<void>();
-  @Output() onDelete = new EventEmitter<void>();
+  @Output() onToggle = new EventEmitter<Task>();
+  @Output() onDelete = new EventEmitter<Task>();
+  @Output() onUpdate = new EventEmitter<Task>();
 
+  editing = false;
+
+  startEdit() {
+    this.editing = true;
+  }
+
+  saveEdit(updated: Task) {
+    this.onUpdate.emit(updated);
+    this.editing = false;
+  }
+
+  cancelEdit() {
+    this.editing = false;
+  }
 }

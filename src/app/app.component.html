@@ -22,4 +22,5 @@
 
 <app-filter-tasks (filterChanged)="onFilterChange($event)"></app-filter-tasks>
 
-<app-task-list [tasks]="visibleTasks" (onToggle)="onToggle($event)" (onDelete)="onDelete($event)"></app-task-list>
+<app-task-list [tasks]="visibleTasks" (onToggle)="onToggle($event)" (onDelete)="onDelete($event)"
+  (onUpdate)="onUpdate($event)"></app-task-list>
