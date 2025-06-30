@@ -4,10 +4,15 @@
   <span>
     {{ task.title }}
     <small>— {{ task.createdAt | date:'mediumDate' }}</small>
-    <small>(Priority: {{ task.priority }})</small>
+    <small> 📁 Priority: {{ task.priority }} </small>
   </span>
 
-  <button class="delete-btn" (click)="onDelete.emit(task)">Delete</button>
+  <div class="task-actions">
+    <button class="edit-btn" (click)="editing = !editing">
+      {{ editing ? 'Cancel' : 'Edit' }}
+    </button>
+    <button class="delete-btn" (click)="onDelete.emit(task)">Delete</button>
+  </div>
+  <app-edit-task *ngIf="editing" [task]="task" (save)="saveEdit($event)" (cancel)="cancelEdit()">
+  </app-edit-task>
 </div>
-
-<app-edit-task *ngIf="editing" [task]="task" (save)="saveEdit($event)" (cancel)="cancelEdit()"></app-edit-task>

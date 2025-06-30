@@ -1,0 +1,43 @@
+.priority-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 0 0;
+}
+
+.priority-value {
+  font-weight: bold;
+  background: #f5f7ff;
+  color: #4769e2;
+  padding: 3px 12px;
+  border-radius: 10px;
+}
+
+.add-task-form {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(50, 50, 50, 0.09);
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.add-btn {
+  margin-top: 12px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background: #4769e2;
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.17s;
+}
+
+.add-btn:hover {
+  background: #2140c1;
+}

@@ -1,0 +1,54 @@
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: transparent;
+  width: 100%;
+  padding: 0;
+  border: none;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.edit-form input[type="text"] {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 1rem;
+}
+
+.edit-form label {
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.edit-form input[type="range"] {
+  width: 100%;
+}
+
+.edit-form button {
+  background: #4769e2;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 6px 14px;
+  margin-right: 10px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.edit-form button[type="button"] {
+  background: #f1f1f1;
+  color: #4769e2;
+}
+
+.edit-form button:hover:not([type="button"]) {
+  background: #2140c1;
+}
+
+.edit-form button[type="button"]:hover {
+  background: #d6d8db;
+  color: #333;
+}
