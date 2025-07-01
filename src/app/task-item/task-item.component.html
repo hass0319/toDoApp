@@ -1,10 +1,10 @@
 <div class="task-item" [class.completed]="task.completed">
   <input type="checkbox" [checked]="task.completed" (change)="onToggle.emit(task)" />
 
-  <span>
-    {{ task.title }}
-    <small>— {{ task.createdAt | date:'mediumDate' }}</small>
-    <small> 📁 Priority: {{ task.priority }} </small>
+  <span class="todo">
+    {{ task.todo }}
+    <small> {{ task.createdAt | date:'mediumDate' }}</small>
+    <!-- <small> 📁 Priority: {{ task.priority }} </small> -->
   </span>
 
   <div class="task-actions">

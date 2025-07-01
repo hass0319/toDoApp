@@ -1,14 +1,14 @@
 <form class="add-task-form" (ngSubmit)="onAddTask()">
-  <input type="text" [(ngModel)]="newTask.title" name="title" placeholder="Enter task" required />
+  <input type="text" [(ngModel)]="newTask.todo" name="title" placeholder="Enter task" required />
 
-  <div class="priority-group">
+  <!-- <div class="priority-group">
     <label>Priority:</label>
     <input type="range" [(ngModel)]="newTask.priority" name="priority" min="1" max="5" list="priorityList" />
     <datalist id="priorityList">
       <option *ngFor="let p of [1,2,3,4,5]" [value]="p">{{ p }}</option>
     </datalist>
     <span class="priority-value">Priority: {{ newTask.priority }}</span>
-  </div>
+  </div> -->
 
   <button class="add-btn" type="submit">Add My Task</button>
 </form>

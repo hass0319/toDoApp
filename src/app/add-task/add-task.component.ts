@@ -16,33 +16,40 @@ export class AddTaskComponent implements OnInit {
 
   @Output() taskAdded = new EventEmitter<Task>();
 
+  randomId = Math.floor(Math.random() * 1_000_000);
+
   newTask: Task = {
-    title: '',
+    todo: '',
+    id: this.randomId,
     createdAt: new Date(),
-    priority: 1,
+    // priority: 1,
     completed: false,
-    deleted: false
+    deleted: false,
+    userId:1
   };
 
   onAddTask() {
-    const title = this.newTask.title.trim();
-    if (!title) return;
+    const todo = this.newTask.todo.trim();
+    if (!todo) return;
 
     this.taskAdded.emit({
       ...this.newTask,
-      title,
+      todo,
+      id: this.randomId,
       createdAt: new Date(),
       completed: false,
-      deleted: false
+      deleted: false,
+      userId: 1
     });
 
     this.newTask = {
-      title: '',
+      todo: '',
+      id: this.randomId,
       createdAt: new Date(),
-      priority: 1,
+      // priority: 1,
       completed: false,
-      deleted: false
+      deleted: false,
+      userId: 1,
     };
   }
-
 }

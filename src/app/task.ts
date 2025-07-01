@@ -1,10 +1,11 @@
 export interface Task {
-  title: string;
-  createdAt: Date;
-  deleted: boolean;
+  id?:number;
+  todo: string;
+  createdAt?: Date;
+  deleted?: boolean;
   completed: boolean;
-  // duration?: number;
-  priority?: number;
+  // priority?: number;
+  userId?:number;
 }
 
 export type Filter = 'all' | 'active' | 'completed';

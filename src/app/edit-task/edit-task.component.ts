@@ -17,16 +17,16 @@ export class EditTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.editTitle    = this.task.title;
+    this.editTitle    = this.task.todo;
     // this.editPriority = this.task.priority !== undefined ? this.task.priority : 0;
-    this.editPriority = this.task.priority ?? 1;
+    // this.editPriority = this.task.priority ?? 1;
   }
 
   onSave() {
     const updated: Task = {
       ...this.task,
-      title: this.editTitle.trim(),
-      priority: this.editPriority
+      todo: this.editTitle.trim(),
+      // priority: this.editPriority
     };
   this.save.emit(updated);
 }

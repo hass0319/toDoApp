@@ -1,11 +1,11 @@
 <form (ngSubmit)="onSave()" class="edit-form">
   <input type="text" [(ngModel)]="editTitle" name="editTitle" required />
 
-  <label>Priority:</label>
+  <!-- <label>Priority:</label>
   <input type="range" [(ngModel)]="editPriority" name="editPriority" min="1" max="5" list="priorityList" />
   <datalist id="priorityList">
     <option *ngFor="let p of [1,2,3,4,5]" [value]="p">{{ p }}</option>
-  </datalist>
+  </datalist> -->
 
   <button type="submit">Save</button>
   <button type="button" (click)="onCancel()">Cancel</button>

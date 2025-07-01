@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task, Filter } from './task';
 import { DatePipe } from '@angular/common';
+import { TodoService } from './todo.service';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +16,28 @@ export class AppComponent implements OnInit {
   tasks: Task[] = [];
   visibleTasks: Task[] = [];
 
-  constructor(private datePipe: DatePipe) {}
+  constructor(
+    private datePipe: DatePipe,
+    private todoService: TodoService
+  ) {}
 
   ngOnInit() {
     this.filterTasks();
+    this.loadTodos();
+  }
+
+  loadTodos(){
+    this.todoService.getTodos(10).subscribe(response => {
+      this.tasks = response.todos;
+      this.filterTasks();
+    })
   }
 
   onNewTask(task: Task) {
-    this.tasks = [...this.tasks, task];
-    this.filterTasks();
+    this.todoService.addTodo(task).subscribe(newTask => {
+      this.tasks = [...this.tasks, newTask];
+      this.filterTasks();
+    })
   }
 
   onFilterChange(f: Filter) {
@@ -38,25 +52,38 @@ export class AppComponent implements OnInit {
         (this.filter === 'active'    && !t.completed) ||
         (this.filter === 'completed' &&  t.completed)
       )
-    );
-        // .sort((a, b) => (a.completed === b.completed) ? 0 : (a.completed ? 1 : -1));
+    ).sort((a, b) => (a.completed === b.completed) ? 0 : (a.completed ? 1 : -1));
   }
 
   onToggle (task: Task){
-    // task.completed = !task.completed;
-    this.tasks = this.tasks.map( t => t=== task?
-      {...t, completed: !t.completed}:
-      t );
-    this.filterTasks();
+    // Ensure task.id is defined before calling updateTodo
+    if (typeof task.id === 'undefined') {
+      console.error('Task id is undefined. Cannot update task.');
+      return;
+    }
+    const done = this.todoService.updateTodo(task.id, { completed: !task.completed });
+
+    done.subscribe (updatedTask => {
+      this.tasks = this.tasks.map( t => t.id === updatedTask.id ?
+        updatedTask : t );
+      this.filterTasks();
+    })
   }
 
   onDelete(task: Task) {
     // this.tasks = this.tasks.filter(t => t !== task);
     // task.deleted = true
-    this.tasks = this.tasks.map( t => t=== task?
-      {...t, deleted:true}:
-      t );
-    this.filterTasks();
+
+    if (typeof task.id === 'undefined') {
+      console.error('Task id is undefined. Cannot update task.');
+      return;
+    }
+
+    this.todoService.deleteTodo(task.id).subscribe(() => {
+      this.tasks = this.tasks.map( t => t.id !== task.id?
+        {...t, deleted:true} : t );
+      this.filterTasks();
+    });
   }
 
   onUpdate(updated: Task) {
@@ -65,12 +92,17 @@ export class AppComponent implements OnInit {
     //     ? updated
     //     : t
     // );
+    if (typeof updated.id === 'undefined') {
+      console.error('Task id is undefined. Cannot update task.');
+      return;
+    }
 
-    this.tasks = this.tasks.map( t =>
-      t.createdAt === updated.createdAt?
-      updated:
-      t );
-    this.filterTasks();
+    const update =this.todoService.updateTodo(updated.id, updated);
+    update.subscribe(apiTask =>{
+      this.tasks = this.tasks.map( t =>
+        t.id === apiTask.id ? apiTask : t );
+      this.filterTasks();
+    });
   }
 }
 
