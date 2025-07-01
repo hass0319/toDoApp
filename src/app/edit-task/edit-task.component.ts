@@ -11,28 +11,32 @@ export class EditTaskComponent implements OnInit {
   @Output() save     = new EventEmitter<Task>();
   @Output() cancel   = new EventEmitter<void>();
 
-  editTitle!: string;
-  editPriority!: number;
+  editTodo: string = "";
+  // editPriority!: number;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.editTitle    = this.task.todo;
+    this.editTodo    = this.task.todo;
     // this.editPriority = this.task.priority !== undefined ? this.task.priority : 0;
     // this.editPriority = this.task.priority ?? 1;
   }
 
-  onSave() {
-    const updated: Task = {
-      ...this.task,
-      todo: this.editTitle.trim(),
-      // priority: this.editPriority
-    };
-  this.save.emit(updated);
+  saveEdit() {
+    const trimmed = this.editTodo.trim();
+    if (trimmed) {
+      this.save.emit({...this.task, todo: trimmed});
+    }
+    //     const updated: Task = {
+    //       ...this.task,
+    //       todo: this.editTitle.trim(),
+    //       // priority: this.editPriority
+    //     };
+  }
+
+  onCancel() {
+    this.cancel.emit();
+  }
 }
 
-onCancel() {
-  this.cancel.emit();
-}
 
-}

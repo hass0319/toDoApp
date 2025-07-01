@@ -78,12 +78,16 @@ export class AppComponent implements OnInit {
       console.error('Task id is undefined. Cannot update task.');
       return;
     }
-
-    this.todoService.deleteTodo(task.id).subscribe(() => {
-      this.tasks = this.tasks.map( t => t.id !== task.id?
-        {...t, deleted:true} : t );
+    if (task.id <=150) {
+      this.todoService.deleteTodo(task.id).subscribe(() => {
+        this.tasks = this.tasks.filter( t => t.id !== task.id?
+          {...t, deleted:true} : t );
+          this.filterTasks();
+      });
+    } else {
+      this.tasks = this.tasks.filter(t => t.id !== task.id);
       this.filterTasks();
-    });
+    }
   }
 
   onUpdate(updated: Task) {
@@ -97,12 +101,18 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    const update =this.todoService.updateTodo(updated.id, updated);
-    update.subscribe(apiTask =>{
-      this.tasks = this.tasks.map( t =>
-        t.id === apiTask.id ? apiTask : t );
+    if (updated.id <=150) {
+      const update =this.todoService.updateTodo(updated.id, updated);
+      update.subscribe(apiTask =>{
+        this.tasks = this.tasks.map( t =>
+          t.id === apiTask.id ? apiTask : t );
+        this.filterTasks();
+      });
+    }else {
+      this.tasks = this.tasks.map(t =>
+        t.id === updated.id ? { ...t, ...updated } : t );
       this.filterTasks();
-    });
+    }
   }
 }
 

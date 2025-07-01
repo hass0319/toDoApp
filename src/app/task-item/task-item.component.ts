@@ -6,12 +6,11 @@ import { Task } from '../task';
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.css']
 })
+
 export class TaskItemComponent implements OnInit {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   @Input()  task!: Task;
   @Output() onToggle = new EventEmitter<Task>();
@@ -33,3 +32,20 @@ export class TaskItemComponent implements OnInit {
     this.editing = false;
   }
 }
+
+
+// editTodo: string = "";
+
+
+// startEdit() {
+//   this.editing = true;
+//   this.editTodo = this.task.todo;
+// }
+
+// saveEdit() {
+//   const trimmed = this.editTodo.trim();
+//   if (trimmed) {
+//     this.onUpdate.emit({...this.task, todo: trimmed});
+//     this.editing = false;
+//   }
+// }
