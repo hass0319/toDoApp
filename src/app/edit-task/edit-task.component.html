@@ -1,7 +1,7 @@
 <form (ngSubmit)="saveEdit()" class="edit-form">
   <input type="text" [(ngModel)]="editTodo" name="editTodo" class="edit-todo-input" required />
-  <button type="submit">Save</button>
-  <button type="button" (click)="onCancel()">Cancel</button>
+  <button class="edit-btn" type="submit">Save</button>
+  <button class="delete-btn" type="button" (click)="onCancel()">Cancel</button>
 </form>
 
 <!-- <label>Priority:</label>

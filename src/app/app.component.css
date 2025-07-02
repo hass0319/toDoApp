@@ -16,9 +16,19 @@ body {
   animation: fadein 0.8s cubic-bezier(.4, 0, .2, 1);
 }
 
+.app-add-task {
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+  width: 100%;
+}
+.add-task-form{
+  width: 100%;
+}
+
 .add-task-form,
 .task-list {
-  width: 500px;
+  width: 50%;
   max-width: 95vw;
   margin: 0 auto;
 }
