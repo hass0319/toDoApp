@@ -1,6 +1,6 @@
 .edit-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
   background: transparent;
   width: 100%;
@@ -11,10 +11,17 @@
 }
 
 .edit-form input[type="text"] {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 1rem;
+  border: 1.5px solid #e7ebee;
+    border-radius: 10px;
+    padding: 7px 16px;
+    font-size: 1rem;
+    background: #fafcff;
+    color: #23272f;
+    outline: none;
+    transition: border-color 0.15s;
+    min-width: 0;
+    width: 100%;
+    flex: 1;
 }
 
 .edit-form label {
@@ -27,21 +34,22 @@
 }
 
 .edit-form button {
-  background: #4769e2;
-  color: #fff;
+  background: #f1f1f1;
   border: none;
-  border-radius: 7px;
-  padding: 6px 14px;
-  margin-right: 10px;
-  font-weight: 500;
-  font-size: 1rem;
+  border-radius: 6px;
+  padding: 6px 12px;
   cursor: pointer;
-  transition: background 0.18s;
+  font-weight: bold;
+  color: #444;
+  transition: background 0.18s, color 0.18s;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  outline: none;
 }
 
 .edit-form button[type="button"] {
   background: #f1f1f1;
-  color: #4769e2;
+  color: #444;
 }
 
 .edit-form button:hover:not([type="button"]) {
@@ -49,6 +57,17 @@
 }
 
 .edit-form button[type="button"]:hover {
-  background: #d6d8db;
-  color: #333;
+  background: #ffe5e5;
+  color: #e84949;
 }
+
+.edit-form button[type="submit"] {
+  background: #4f8cff;
+  color: #444;
+}
+
+.edit-form button[type="submit"]:hover {
+  background: #e4edfd;
+  color: #2565e7;
+}
+
