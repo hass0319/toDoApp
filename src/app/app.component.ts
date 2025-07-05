@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { Task, Filter } from './task';
 import { DatePipe } from '@angular/common';
 import { TodoService } from './todo.service';
+import { AuthService } from './auth.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private datePipe: DatePipe,
-    private todoService: TodoService
+    private todoService: TodoService,
+    public auth: AuthService,
   ) {}
 
   ngOnInit() {
