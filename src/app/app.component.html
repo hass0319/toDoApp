@@ -17,30 +17,5 @@
 
   <button type="submit">Add Task</button>
 </form> -->
-<header class="header">
-  <nav class="navbar sticky-top navbar-light" style="background-color: #abb7c0;">
 
-    <a class="navbar-brand" href="#" aria-label="User">
-      <i class="bi bi-person" alt="user icon"></i>
-      <!-- <span class="user-name">Amro</span> -->
-      <span class="user-name">{{ auth.username }}</span>
-    </a>
-    <button type="button" class="btn btn-outline-secondary">
-      <a class="navbar-brand" (click)="auth.logout()" href="/login">Logout</a>
-    </button>
-  </nav>
-</header>
-
-<div class="main-container">
-  <app-add-task (taskAdded)="onNewTask($event)" class="app-add-task"></app-add-task>
-
-  <app-filter-tasks (filterChanged)="onFilterChange($event)"></app-filter-tasks>
-
-  <div class="task-list">
-    <app-task-list [tasks]="visibleTasks" (onToggle)="onToggle($event)" (onDelete)="onDelete($event)"
-      (onUpdate)="onUpdate($event)"></app-task-list>
-  </div>
-
-  <app-login></app-login>
-
-</div>
+<router-outlet></router-outlet>

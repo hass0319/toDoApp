@@ -7,6 +7,9 @@ export const environment = {
   todo: {
     api: 'https://dummyjson.com/todos',
   },
+  auth: {
+    api: 'https://dummyjson.com/auth/login',
+  }
 };
 
 /*

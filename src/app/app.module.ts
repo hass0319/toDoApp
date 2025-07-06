@@ -11,6 +11,7 @@ import { TaskItemComponent } from './task-item/task-item.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { FilterTasksComponent } from './filter-tasks/filter-tasks.component';
 import { LoginComponent } from './login/login.component';
+import { TodoPageComponent } from './todo-page/todo-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginComponent } from './login/login.component';
     TaskItemComponent,
     FilterTasksComponent,
     EditTaskComponent,
-    LoginComponent
+    LoginComponent,
+    TodoPageComponent
   ],
   imports: [
     BrowserModule,
