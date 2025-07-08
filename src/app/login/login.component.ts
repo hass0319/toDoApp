@@ -20,7 +20,12 @@ export class LoginComponent implements OnInit {
   onLogin(){
     this.auth.login(this.username, this.password).subscribe({
       next: ()=> this.router.navigate(['/']),
-      error:()=> this.error = "Invalid Username or Password",
+      error:()=> {
+        this.error = "Invalid Username or Password"
+      setTimeout(() => {
+        this.error = ""
+      }, 5000);
+    },
       complete: () => console.log('Login attempt completed')
     })
   }

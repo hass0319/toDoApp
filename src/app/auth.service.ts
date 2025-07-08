@@ -20,7 +20,7 @@ export class AuthService {
     const loginReq$ = this.http.post<any>(this.apiUrl, credentials);
     const loginRes$ = loginReq$.pipe(
       tap(res => {
-        localStorage.setItem('token', res.token);
+        localStorage.setItem('token', res.accessToken);
         this._isLoggedIn$.next(true);
       })
     );
