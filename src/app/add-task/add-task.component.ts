@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../todo.service';
 import { Task} from '../task';
 
 @Component({
@@ -9,46 +10,26 @@ import { Task} from '../task';
 
 export class AddTaskComponent implements OnInit {
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  @Output() taskAdded = new EventEmitter<Task>();
 
-  randomId = Math.floor(Math.random() * 1_000_000);
+  // randomId = Math.floor(Math.random() * 1_000_000);
 
   newTask: Partial<Task> = {
-    userId: 1,
-    id: this.randomId,
-    todo: '',
-    createdAt: new Date(),
-    completed: false,
-    deleted: false,
-    // priority: 1,
+    // userId: 1,
+    // id: this.randomId,
+    // todo: '',
+    // createdAt: new Date(),
+    // completed: false,
+    // deleted: false,
+    // // priority: 1,
   };
 
   onAddTask() {
     const todo = (this.newTask.todo ?? '').trim();
     if (!todo) return;
-
-    this.taskAdded.emit({
-      ...this.newTask,
-      userId: 1,
-      id: this.randomId,
-      todo,
-      createdAt: new Date(),
-      completed: false,
-      deleted: false,
-    });
-
-    this.newTask = {
-      todo: '',
-      createdAt: new Date(),
-      // priority: 1,
-      completed: false,
-      deleted: false,
-      userId: 1,
-    };
+    this.todoService.addTodo(this.newTask).subscribe();
   }
 }

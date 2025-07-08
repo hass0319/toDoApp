@@ -1,3 +1,9 @@
 export const environment = {
-  production: true
+  production: true,
+  todo: {
+    api: 'https://dummyjson.com/todos',
+  },
+  auth: {
+    api: 'https://dummyjson.com/auth/login',
+  }
 };

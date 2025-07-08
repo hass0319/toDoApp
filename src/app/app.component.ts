@@ -1,6 +1,6 @@
 import { Task, Filter } from './task';
-import { TodoService } from './todo.service';
-import { AuthService } from './auth.service';
+// import { TodoService } from './todo.service';
+// import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,13 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppComponent implements OnInit {
-
-
   constructor() {}
-
   ngOnInit() {}
-
-
 }
 
 

@@ -1,27 +1,28 @@
 <div class="task-item" [class.completed]="task.completed">
-  <input type="checkbox" [checked]="task.completed" (change)="onToggle.emit(task)" />
-
-  <!-- <span class="todo">
-    {{ task.todo }}
-    <small> {{ task.createdAt | date:'mediumDate' }}</small>
-    <small> 📁 Priority: {{ task.priority }} </small>
-  </span> -->
+  <!-- <input type="checkbox" [checked]="task.completed" (change)="onToggle.emit(task)" /> -->
+  <input type="checkbox" [checked]="task.completed" (change)="toggleComplete()" />
 
   <span class="todo">
-    <ng-container *ngIf="!editing; else editInput">
+    <ng-container *ngIf="!(isEditing$ | async) else editInput">
       {{ task.todo }}
       <small> {{ task.createdAt | date:'mediumDate' }}</small>
     </ng-container>
     <ng-template #editInput>
-      <app-edit-task [task]="task" (save)="saveEdit($event)" (cancel)="cancelEdit()"></app-edit-task>
-      <!-- <input type="text" [(ngModel)]="editTodo" [value]="task.todo" class="edit-todo-input" /> -->
+      <app-edit-task [task]="task"></app-edit-task>
     </ng-template>
   </span>
 
-  <div class="task-actions" *ngIf="!editing">
-    <button class="edit-btn" (click)="editing = !editing">Edit</button>
-    <button class="delete-btn" (click)="onDelete.emit(task)">Delete</button>
+  <div class="task-actions" *ngIf="!(isEditing$ | async)">
+    <button class="edit-btn" (click)="startEdit()">Edit</button>
+    <button class="delete-btn" (click)="deleteTask()">Delete</button>
   </div>
+
+  <!-- <app-edit-task [task]="task" (save)="saveEdit($event)" (cancel)="cancelEdit()"></app-edit-task> -->
+  <!-- <input type="text" [(ngModel)]="editTodo" [value]="task.todo" class="edit-todo-input" /> -->
+
+  <!-- <button class="edit-btn" (click)="editing = !editing">Edit</button> -->
+  <!-- <button class="delete-btn" (click)="onDelete.emit(task)">Delete</button> -->
+
   <!-- <div class="task-actions" *ngIf="editing">
     <button class="delete-btn" (click)="cancelEdit()">Cancel</button>
     <button class="edit-btn" (click)="saveEdit()">Save</button>

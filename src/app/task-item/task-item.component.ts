@@ -1,5 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../task';
+import { Observable, map } from 'rxjs';
+import { TodoService } from '../todo.service';
+import { Component, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-task-item',
@@ -9,30 +12,63 @@ import { Task } from '../task';
 
 export class TaskItemComponent implements OnInit {
 
-  constructor() { }
-  ngOnInit(): void {}
+  constructor(private todoService: TodoService) {}
 
-  @Input()  task!: Task;
-  @Output() onToggle = new EventEmitter<Task>();
-  @Output() onDelete = new EventEmitter<Task>();
-  @Output() onUpdate = new EventEmitter<Task>();
-
-  editing = false;
-
-  startEdit() {
-    this.editing = true;
+  ngOnInit(): void {
+    this.isEditing$ = this.todoService.editingTaskId$.pipe(
+      map(editingId => editingId === this.task.id)
+    );
   }
 
-  saveEdit(updated: Task) {
-    this.onUpdate.emit(updated);
-    this.editing = false;
+  @Input()  task!: Task;
+  isEditing$!: Observable<boolean>
+
+  startEdit() {
+    this.todoService.SetEditingTaskId(this.task.id!);
+  }
+
+  toggleComplete(){
+    if (this.task.id !== undefined){
+      this.todoService.updateTodo(
+        this.task.id, {
+          ...this.task,
+          completed: !this.task.completed
+        }).subscribe();
+    }else {
+      console.error('Task id is undefined. Cannot update todo.');
+    }
   }
 
   cancelEdit() {
-    this.editing = false;
+    this.todoService.SetEditingTaskId(null);
+  }
+
+  deleteTask() {
+    if (this.task.id !== undefined){
+      this.todoService.deleteTodo(this.task.id).subscribe();
+    }else {
+      console.error('Task id is undefined. Cannot update todo.');
+    }
   }
 }
 
+// @Output() onToggle = new EventEmitter<Task>();
+// @Output() onDelete = new EventEmitter<Task>();
+// @Output() onUpdate = new EventEmitter<Task>();
+// editing = false;
+
+// startEdit() {
+// this.editing = true;
+// }
+
+// saveEdit(updated: Task) {
+// this.onUpdate.emit(updated);
+// this.editing = false;
+// }
+
+// cancelEdit() {
+// this.editing = false;
+// }
 
 // editTodo: string = "";
 

@@ -14,7 +14,7 @@ export class TaskListComponent implements OnInit {
   }
 
   @Input() tasks: Task[] = [];
-  @Output() onToggle = new EventEmitter<Task>();
-  @Output() onDelete = new EventEmitter<Task>();
-  @Output() onUpdate = new EventEmitter<Task>();
+  // @Output() onToggle = new EventEmitter<Task>();
+  // @Output() onDelete = new EventEmitter<Task>();
+  // @Output() onUpdate = new EventEmitter<Task>();
 }

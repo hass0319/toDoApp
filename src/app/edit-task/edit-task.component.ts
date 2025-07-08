@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Task } from '../task';
+import { TodoService } from '../todo.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-edit-task',
@@ -8,34 +9,33 @@ import { Task } from '../task';
 })
 export class EditTaskComponent implements OnInit {
   @Input() task!: Task;
-  @Output() save     = new EventEmitter<Task>();
-  @Output() cancel   = new EventEmitter<void>();
+  // @Output() save     = new EventEmitter<Task>();
+  // @Output() cancel   = new EventEmitter<void>();
 
   editTodo: string = "";
-  // editPriority!: number;
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit(): void {
-    this.editTodo    = this.task.todo;
-    // this.editPriority = this.task.priority !== undefined ? this.task.priority : 0;
-    // this.editPriority = this.task.priority ?? 1;
+    this.editTodo = this.task.todo;
   }
 
   saveEdit() {
     const trimmed = this.editTodo.trim();
-    if (trimmed) {
-      this.save.emit({...this.task, todo: trimmed});
+    if (trimmed && this.task.id) {
+      this.todoService.
+      updateTodo(this.task.id, {
+        ...this.task, todo: trimmed
+      }).
+      subscribe(() => {
+        this.todoService.SetEditingTaskId(null);
+      });
     }
-    //     const updated: Task = {
-    //       ...this.task,
-    //       todo: this.editTitle.trim(),
-    //       // priority: this.editPriority
-    //     };
   }
 
   onCancel() {
-    this.cancel.emit();
+    // this.cancel.emit();
+    this.todoService.SetEditingTaskId(null);
   }
 }
 
