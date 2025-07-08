@@ -30,7 +30,7 @@ export class TaskItemComponent implements OnInit {
   toggleComplete(){
     if (this.task.id !== undefined){
       this.todoService.updateTodo(
-        this.task.id, {
+        this.task.id!, {
           ...this.task,
           completed: !this.task.completed
         }).subscribe();

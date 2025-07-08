@@ -9,8 +9,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EditTaskComponent implements OnInit {
   @Input() task!: Task;
-  // @Output() save     = new EventEmitter<Task>();
-  // @Output() cancel   = new EventEmitter<void>();
 
   editTodo: string = "";
 
@@ -22,6 +20,7 @@ export class EditTaskComponent implements OnInit {
 
   saveEdit() {
     const trimmed = this.editTodo.trim();
+    // if (trimmed && this.task.id) {
     if (trimmed && this.task.id) {
       this.todoService.
       updateTodo(this.task.id, {
@@ -34,7 +33,6 @@ export class EditTaskComponent implements OnInit {
   }
 
   onCancel() {
-    // this.cancel.emit();
     this.todoService.SetEditingTaskId(null);
   }
 }

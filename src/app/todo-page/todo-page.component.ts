@@ -26,7 +26,6 @@ export class TodoPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.todoService.getTodos();
     this.filteredTasks$ = combineLatest ([
       this.todoService.tasks$,
       this.todoService.filter$
@@ -41,6 +40,8 @@ export class TodoPageComponent implements OnInit {
         )
       )
     );
+
+    this.todoService.getTodos(10).subscribe();
   }
 
   // get FilteredTasks$(): Observable<Task[]> {

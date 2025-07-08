@@ -2,11 +2,14 @@
   <!-- <input type="checkbox" [checked]="task.completed" (change)="onToggle.emit(task)" /> -->
   <input type="checkbox" [checked]="task.completed" (change)="toggleComplete()" />
 
-  <span class="todo">
-    <ng-container *ngIf="!(isEditing$ | async) else editInput">
-      {{ task.todo }}
-      <small> {{ task.createdAt | date:'mediumDate' }}</small>
+  <span class="todo" [class.completed]="task.completed && !(isEditing$ | async)">
+    <ng-container class="title" *ngIf="!(isEditing$ | async) else editInput">
+      <span class="task-text" [class.completed]="task.completed">
+        {{ task.todo }}
+        <small> {{ task.createdAt | date:'mediumDate' }}</small>
+      </span>
     </ng-container>
+
     <ng-template #editInput>
       <app-edit-task [task]="task"></app-edit-task>
     </ng-template>

@@ -18,12 +18,12 @@ export class AddTaskComponent implements OnInit {
   // randomId = Math.floor(Math.random() * 1_000_000);
 
   newTask: Partial<Task> = {
-    // userId: 1,
+    userId: 1,
     // id: this.randomId,
-    // todo: '',
+    todo: '',
     // createdAt: new Date(),
-    // completed: false,
-    // deleted: false,
+    completed: false,
+    deleted: false,
     // // priority: 1,
   };
 
