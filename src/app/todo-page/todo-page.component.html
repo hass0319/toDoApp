@@ -3,10 +3,10 @@
 
     <a class="navbar-brand" href="#" aria-label="User">
       <i class="bi bi-person" alt="user icon"></i>
-      <span class="user-name">{{ auth.username }}</span>
+      <span class="user-name" *ngIf="auth.username">{{ auth.username }}</span>
     </a>
-    <button type="button" class="btn btn-outline-secondary">
-      <a class="navbar-brand" (click)="auth.logout()" href="/login">Logout</a>
+    <button type="button" class="logout-btn">
+      <a class="logout-link" (click)="auth.logout()" href="/login">Logout</a>
     </button>
   </nav>
 </header>

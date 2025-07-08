@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 export class AuthService {
   private apiUrl = environment.auth.api;
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  // private _isLoggedIn$ = new BehaviorSubject<boolean>((this.hasToken()));
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
   constructor( private http: HttpClient) { }
@@ -21,6 +20,7 @@ export class AuthService {
     const loginRes$ = loginReq$.pipe(
       tap(res => {
         localStorage.setItem('token', res.accessToken);
+        localStorage.setItem('username', username);
         this._isLoggedIn$.next(true);
       })
     );

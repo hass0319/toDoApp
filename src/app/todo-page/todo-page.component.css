@@ -1,3 +1,38 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', Arial, sans-serif;
+}
+
+header{
+  font-family: 'Baloo 2', Arial, sans-serif;
+}
+
+i.bi {
+  font-size: 1.5rem;
+  padding: 0 10px
+}
+
+a.logout-link {
+  padding: 0 0;
+  text-decoration: none;
+  line-height: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.logout-btn {
+  margin: 10px;
+  border-radius: 0.5rem;
+  min-width: 8%;
+  min-height: 2.5rem;
+  background-color: #d6e9f4;
+}
+
+.logout-btn:hover{
+  background-color: #9aa8b1;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
