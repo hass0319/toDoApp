@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap} from 'rxjs';
@@ -12,7 +13,7 @@ export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient, private router: Router) { }
 
   login(username:string, password: string): Observable<any>{
     const credentials = {username, password}
@@ -30,6 +31,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('accessToken');
     this._isLoggedIn$.next(false);
+    this.router.navigate(['/login']);
   }
 
   get username(): string| null {
