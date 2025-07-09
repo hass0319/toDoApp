@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -30,8 +32,12 @@ import { TodoPageComponent } from './todo-page/todo-page.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi:true}
+  ],
+  bootstrap: [AppComponent],
 })
 
 export class AppModule { }

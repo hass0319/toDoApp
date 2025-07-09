@@ -19,7 +19,7 @@ export class AuthService {
     const loginReq$ = this.http.post<any>(this.apiUrl, credentials);
     const loginRes$ = loginReq$.pipe(
       tap(res => {
-        localStorage.setItem('token', res.accessToken);
+        localStorage.setItem('accessToken', res.accessToken);
         localStorage.setItem('username', username);
         this._isLoggedIn$.next(true);
       })
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     this._isLoggedIn$.next(false);
   }
 
@@ -37,10 +37,10 @@ export class AuthService {
   }
 
   get token(): string| null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('accessToken');
   }
 
   private hasToken(): boolean{
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('accessToken');
   }
 }
