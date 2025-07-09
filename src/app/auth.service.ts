@@ -31,7 +31,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('accessToken');
     this._isLoggedIn$.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 
   get username(): string| null {
