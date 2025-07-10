@@ -34,10 +34,13 @@ import { FilterTasksComponent } from './filter-tasks/filter-tasks.component';
     AppRoutingModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,
+    { provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi:true},
-      { provide: LocationStrategy, useClass: HashLocationStrategy }
+      multi: true
+    },
+    { provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
   ],
   bootstrap: [AppComponent],
 })
