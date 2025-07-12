@@ -1,6 +1,7 @@
 .task-item {
   position: relative;
   display: flex;
+    flex-direction: row;
     align-items: center;
   width: 100%;
   padding: 18px 22px;
@@ -26,23 +27,46 @@
   cursor: pointer;
 }
 
+label {
+  margin-left: 10px;
+}
+
+.checkbox-label{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: 1em;
+  cursor: pointer;
+}
+
 /* span.todo .task-text.completed{ */
 span.todo .completed{
   opacity: 0.7;
   text-decoration: line-through;
 }
 
+.task-item[input] {
+  width:75%;
+}
+
 .task-actions {
   margin-left: auto;
-  display: flex;
+  display: none;
   gap: 10px;
-  opacity: 0;
   transition: opacity 0.2s;
 }
 
 .task-item:hover .task-actions {
-  opacity: 1;
+  display: flex;
 }
+/* .task-actions:hover {
+  display: flex;
+} */
 
 .delete-btn,
 .edit-btn {
@@ -63,8 +87,73 @@ span.todo .completed{
   background: #ffe5e5;
   color: #e84949;
 }
-
 .edit-btn:hover {
   background: #e4edfd;
   color: #2565e7;
 }
+
+@media only screen and (max-width: 700px) {
+   .task-item {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .task-actions {
+    margin-top: 12px;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 7px;
+  }
+
+  .task-item:hover {
+    flex-direction: column;
+  }
+
+  .task-item input[type="checkbox"] {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 1em;
+  }
+
+  .task-item:hover {
+    flex-direction: column;
+  }
+
+  span.todo .completed {
+    opacity: 0.7;
+    text-decoration: line-through;
+  }
+
+  label {
+    margin-left: 0;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 0;
+    font-size: 0.95rem;
+  }
+}
+
+/* @media only screen and (max-width: 700px) {
+  .task-item {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.6rem 0.7rem;
+    margin-right: 10px;
+    font-size: 1rem;
+  }
+
+  .task-actions:hover {
+    flex-direction: column;
+  }
+
+  label {
+    margin-left: 10px;
+  }
+} */

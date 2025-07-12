@@ -1,39 +1,40 @@
 <div class="task-item" [class.completed]="task.completed">
-  <!-- <input type="checkbox" [checked]="task.completed" (change)="onToggle.emit(task)" /> -->
-  <input type="checkbox" [checked]="task.completed" (change)="toggleComplete()" />
+  <label class="checkbox-label" [for]="'todo-checkbox-' + task.id">
+    <input type="checkbox" [checked]="task.completed" (change)="toggleComplete()" [id]="'todo-checkbox-' + task.id" />
 
-  <span class="todo" [class.completed]="task.completed && !(isEditing$ | async)">
-    <ng-container class="title" *ngIf="!(isEditing$ | async) else editInput">
-      <span class="task-text" [class.completed]="task.completed">
-        {{ task.todo }}
-        <small> {{ task.createdAt | date:'mediumDate' }}</small>
-      </span>
-    </ng-container>
+    <span class="todo" [class.completed]="task.completed && !(isEditing$ | async)">
+      <ng-container class="title" *ngIf="!(isEditing$ | async) else editInput">
+        <span class="task-text" [class.completed]="task.completed">
+          {{ task.todo }}
+          <!-- <small> {{ task.createdAt | date:'mediumDate' }}</small> -->
+        </span>
+      </ng-container>
 
-    <ng-template #editInput>
-      <app-edit-task [task]="task"></app-edit-task>
-    </ng-template>
-  </span>
+      <ng-template #editInput>
+        <app-edit-task [task]="task"></app-edit-task>
+      </ng-template>
+    </span>
+  </label>
 
   <div class="task-actions" *ngIf="!(isEditing$ | async)">
     <button class="edit-btn" (click)="startEdit()">Edit</button>
     <button class="delete-btn" (click)="deleteTask()">Delete</button>
   </div>
+</div>
 
-  <!-- <app-edit-task [task]="task" (save)="saveEdit($event)" (cancel)="cancelEdit()"></app-edit-task> -->
-  <!-- <input type="text" [(ngModel)]="editTodo" [value]="task.todo" class="edit-todo-input" /> -->
+<!-- <app-edit-task [task]="task" (save)="saveEdit($event)" (cancel)="cancelEdit()"></app-edit-task> -->
+<!-- <input type="text" [(ngModel)]="editTodo" [value]="task.todo" class="edit-todo-input" /> -->
 
-  <!-- <button class="edit-btn" (click)="editing = !editing">Edit</button> -->
-  <!-- <button class="delete-btn" (click)="onDelete.emit(task)">Delete</button> -->
+<!-- <button class="edit-btn" (click)="editing = !editing">Edit</button> -->
+<!-- <button class="delete-btn" (click)="onDelete.emit(task)">Delete</button> -->
 
-  <!-- <div class="task-actions" *ngIf="editing">
+<!-- <div class="task-actions" *ngIf="editing">
     <button class="delete-btn" (click)="cancelEdit()">Cancel</button>
     <button class="edit-btn" (click)="saveEdit()">Save</button>
   </div> -->
 
-  <!-- <app-edit-task *ngIf="editing" [task]="task" (save)="saveEdit()" (cancel)="cancelEdit()">
+<!-- <app-edit-task *ngIf="editing" [task]="task" (save)="saveEdit()" (cancel)="cancelEdit()">
   </app-edit-task> -->
-</div>
 
 
 <!-- <div class="task-item" [class.completed]="task.completed">
